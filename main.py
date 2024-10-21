@@ -1,9 +1,9 @@
-import LVCSView;
+from Views import ProjectChooserView
+from Controllers import ProjectChooserController
 
-def print_hi(name):
-    print(f'Hi, {name}')
+view = ProjectChooserView.LVCSView()
+controller = ProjectChooserController.ProjectChooserController(None, view)
 
+view.set_ctrl(controller)
 
-if __name__ == '__main__':
-    print_hi('PyCharm')
-    LVCSView.Ui_MainWindow
+view.mainloop()

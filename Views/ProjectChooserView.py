@@ -1,0 +1,49 @@
+import tkinter as tk
+from Views.DesignElements import ScrolledListBox
+
+
+class LVCSView(tk.Tk):
+    def __init__(self):
+        super().__init__()
+        self.title("Список контактов")
+        self.geometry("1000x600+100+50")
+
+        self.Scrolledlistbox = ScrolledListBox.ScrolledListBox(self)
+        self.Scrolledlistbox.place(relx=0.014, rely=0.022, relheight=0.856, relwidth=0.708)
+        self.Scrolledlistbox.configure(background="white")
+        self.Scrolledlistbox.configure(cursor="xterm")
+        self.Scrolledlistbox.configure(disabledforeground="#a3a3a3")
+        self.Scrolledlistbox.configure(font="TkFixedFont")
+        self.Scrolledlistbox.configure(foreground="black")
+        self.Scrolledlistbox.configure(highlightbackground="#d9d9d9")
+        self.Scrolledlistbox.configure(highlightcolor="#d9d9d9")
+        self.Scrolledlistbox.configure(selectbackground="#d9d9d9")
+        self.Scrolledlistbox.configure(selectforeground="black")
+
+        self.Button_open = tk.Button(self)
+        self.Button_open.place(relx=0.749, rely=0.022, height=66, width=167)
+        self.Button_open.configure(activebackground="#d9d9d9")
+        self.Button_open.configure(activeforeground="black")
+        self.Button_open.configure(background="#d9d9d9")
+        self.Button_open.configure(disabledforeground="#a3a3a3")
+        self.Button_open.configure(foreground="#000000")
+        self.Button_open.configure(highlightbackground="#d9d9d9")
+        self.Button_open.configure(highlightcolor="#000000")
+        self.Button_open.configure(text='''Открыть''')
+
+        self.Button_create = tk.Button(self)
+        self.Button_create.place(relx=0.749, rely=0.2, height=76, width=167)
+        self.Button_create.configure(activebackground="#d9d9d9")
+        self.Button_create.configure(activeforeground="black")
+        self.Button_create.configure(background="#d9d9d9")
+        self.Button_create.configure(disabledforeground="#a3a3a3")
+        self.Button_create.configure(foreground="#000000")
+        self.Button_create.configure(highlightbackground="#d9d9d9")
+        self.Button_create.configure(highlightcolor="#000000")
+        self.Button_create.configure(text='''Создать''')
+
+    def add_item(self, item):
+        self.Scrolledlistbox.insert(0, item)
+
+    def set_ctrl(self, ctrl):
+        self.Button_open.config(command=ctrl.create_item)
