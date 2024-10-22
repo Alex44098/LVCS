@@ -2,11 +2,12 @@ import tkinter as tk
 from Views.DesignElements import ScrolledListBox
 
 
-class LVCSView(tk.Tk):
-    def __init__(self):
-        super().__init__()
+class ProjectManagerView(tk.Toplevel):
+    def __init__(self, parent):
+        tk.Toplevel.__init__(self, parent)
         self.title("Список контактов")
         self.geometry("1000x600+100+50")
+        self.protocol('WM_DELETE_WINDOW', self.master.destroy)
 
         self.Scrolledlistbox = ScrolledListBox.ScrolledListBox(self)
         self.Scrolledlistbox.place(relx=0.014, rely=0.022, relheight=0.856, relwidth=0.708)
@@ -19,6 +20,7 @@ class LVCSView(tk.Tk):
         self.Scrolledlistbox.configure(highlightcolor="#d9d9d9")
         self.Scrolledlistbox.configure(selectbackground="#d9d9d9")
         self.Scrolledlistbox.configure(selectforeground="black")
+        # self.Scrolledlistbox.pack()
 
         self.Button_open = tk.Button(self)
         self.Button_open.place(relx=0.749, rely=0.022, height=66, width=167)
@@ -30,6 +32,7 @@ class LVCSView(tk.Tk):
         self.Button_open.configure(highlightbackground="#d9d9d9")
         self.Button_open.configure(highlightcolor="#000000")
         self.Button_open.configure(text='''Открыть''')
+        # self.Button_open.pack()
 
         self.Button_create = tk.Button(self)
         self.Button_create.place(relx=0.749, rely=0.2, height=76, width=167)
@@ -41,9 +44,11 @@ class LVCSView(tk.Tk):
         self.Button_create.configure(highlightbackground="#d9d9d9")
         self.Button_create.configure(highlightcolor="#000000")
         self.Button_create.configure(text='''Создать''')
+        # self.Button_create.pack()
 
     def add_item(self, item):
         self.Scrolledlistbox.insert(0, item)
 
     def set_ctrl(self, ctrl):
-        self.Button_open.config(command=ctrl.create_item)
+        self.Button_create.config(command=ctrl.create_new_project)
+        self.Button_open.config(command=ctrl.open_project)
