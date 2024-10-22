@@ -21,6 +21,8 @@ def init_database(name):
 if __name__ == '__main__':
     connection = init_database("database.db")
     root = Tk()
+    root.withdraw()
+
     project_manager_controller = ProjectManagerController.ProjectChooserController(connection, root)
     root.mainloop()
 

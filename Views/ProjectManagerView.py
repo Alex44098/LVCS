@@ -5,14 +5,13 @@ from Views.DesignElements import ScrolledListBox
 class ProjectManagerView(tk.Toplevel):
     def __init__(self, parent):
         tk.Toplevel.__init__(self, parent)
-        self.title("Список контактов")
+        self.title("Список проектов")
         self.geometry("1000x600+100+50")
         self.protocol('WM_DELETE_WINDOW', self.master.destroy)
 
         self.Scrolledlistbox = ScrolledListBox.ScrolledListBox(self)
         self.Scrolledlistbox.place(relx=0.014, rely=0.022, relheight=0.856, relwidth=0.708)
         self.Scrolledlistbox.configure(background="white")
-        self.Scrolledlistbox.configure(cursor="xterm")
         self.Scrolledlistbox.configure(disabledforeground="#a3a3a3")
         self.Scrolledlistbox.configure(font="TkFixedFont")
         self.Scrolledlistbox.configure(foreground="black")
@@ -48,7 +47,3 @@ class ProjectManagerView(tk.Toplevel):
 
     def add_item(self, item):
         self.Scrolledlistbox.insert(0, item)
-
-    def set_ctrl(self, ctrl):
-        self.Button_create.config(command=ctrl.create_new_project)
-        self.Button_open.config(command=ctrl.open_project)
