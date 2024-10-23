@@ -1,5 +1,5 @@
 from Models import ProjectManagerModel
-from Views import ProjectManagerView, ProjectView
+from Views import ProjectManagerView, ProjectView, ProjectCreatorView
 
 
 class ProjectChooserController(object):
@@ -13,7 +13,7 @@ class ProjectChooserController(object):
         self.create_project_view()
 
     def create_new_project(self):
-        self.view.add_item("Aboba")
+        self.create_project_creator_view()
 
     def create_project_manager_view(self):
         if self.view is not None:
@@ -21,6 +21,11 @@ class ProjectChooserController(object):
         self.view = ProjectManagerView.ProjectManagerView(self.root)
         self.view.Button_create.config(command=self.create_new_project)
         self.view.Button_open.config(command=self.open_project)
+
+    def create_project_creator_view(self):
+        creator_view = ProjectCreatorView.ProjectCreatorView(self.root)
+        creator_view.grab_set()
+        creator_view.create_button.config(command=self.create_project_view)
 
     def create_project_view(self):
         if self.view is not None:

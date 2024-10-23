@@ -19,7 +19,6 @@ class ProjectManagerView(tk.Toplevel):
         self.Scrolledlistbox.configure(highlightcolor="#d9d9d9")
         self.Scrolledlistbox.configure(selectbackground="#d9d9d9")
         self.Scrolledlistbox.configure(selectforeground="black")
-        # self.Scrolledlistbox.pack()
 
         self.Button_open = tk.Button(self)
         self.Button_open.place(relx=0.749, rely=0.022, height=66, width=167)
@@ -31,7 +30,6 @@ class ProjectManagerView(tk.Toplevel):
         self.Button_open.configure(highlightbackground="#d9d9d9")
         self.Button_open.configure(highlightcolor="#000000")
         self.Button_open.configure(text='''Открыть''')
-        # self.Button_open.pack()
 
         self.Button_create = tk.Button(self)
         self.Button_create.place(relx=0.749, rely=0.2, height=76, width=167)
@@ -43,7 +41,6 @@ class ProjectManagerView(tk.Toplevel):
         self.Button_create.configure(highlightbackground="#d9d9d9")
         self.Button_create.configure(highlightcolor="#000000")
         self.Button_create.configure(text='''Создать''')
-        # self.Button_create.pack()
 
     def add_item(self, item):
         self.Scrolledlistbox.insert(0, item)
