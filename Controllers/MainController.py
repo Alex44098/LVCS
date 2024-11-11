@@ -1,33 +1,39 @@
-from Models import ProjectManagerModel
-from Views import ProjectManagerView, ProjectView, ProjectCreatorView
+from Controllers.ProjectCreatorController import ProjectCreatorController
+from Controllers.ProjectManagerController import ProjectManagerController
+from Models import MainModel
+from Views import MainView
 
 
-class ProjectChooserController(object):
-    def __init__(self, conn, root):
-        self.root = root
-        self.model = ProjectManagerModel.ProjectManagerModel(conn)
-        self.view = None
-        self.create_project_manager_view()
+class MainController:
+    def __init__(self, model: MainModel, view: MainView):
+        self.view = view
+        self.model = model
+        self.project_manager_controller = ProjectManagerController(model, view)
+        self.project_creator_controller = ProjectCreatorController(model, view)
 
-    def open_project(self):
-        self.create_project_view()
+        self.model.project_manager.add_listener(
+            "open_creator", self.open_creator_listener
+        )
+        self.model.project_manager.add_listener(
+            "open_project", self.open_project_listener
+        )
+        self.model.project_creator.add_listener(
+            "create_project", self.open_project_listener
+        )
 
-    def create_new_project(self):
-        self.create_project_creator_view()
+        self.model.project_creator.add_listener(
+            "close_creator", self.open_project_manager
+        )
 
-    def create_project_manager_view(self):
-        if self.view is not None:
-            self.view.withdraw()
-        self.view = ProjectManagerView.ProjectManagerView(self.root)
-        self.view.Button_create.config(command=self.create_new_project)
-        self.view.Button_open.config(command=self.open_project)
+    def open_creator_listener(self):
+        self.view.switch("project_creator")
 
-    def create_project_creator_view(self):
-        creator_view = ProjectCreatorView.ProjectCreatorView(self.root)
-        creator_view.grab_set()
-        creator_view.create_button.config(command=self.create_project_view)
+    def open_project_listener(self):
+        self.view.switch("project")
 
-    def create_project_view(self):
-        if self.view is not None:
-            self.view.withdraw()
-        self.view = ProjectView.ProjectView(self.root, "../")
+    def open_project_manager(self):
+        self.view.switch("project_manager")
+
+    def start(self):
+        self.open_project_manager()
+        self.view.start_loop()
