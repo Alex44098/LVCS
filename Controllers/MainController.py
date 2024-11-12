@@ -1,3 +1,4 @@
+from Controllers.ProjectController import ProjectController
 from Controllers.ProjectCreatorController import ProjectCreatorController
 from Controllers.ProjectManagerController import ProjectManagerController
 from Models import MainModel
@@ -10,6 +11,7 @@ class MainController:
         self.model = model
         self.project_manager_controller = ProjectManagerController(model, view)
         self.project_creator_controller = ProjectCreatorController(model, view)
+        self.project_controller = ProjectController(model, view)
 
         self.model.project_manager.add_listener(
             "open_creator", self.open_creator_listener
@@ -30,6 +32,8 @@ class MainController:
 
     def open_project_listener(self):
         self.view.switch("project")
+        self.view.current_frame.set_project_path("../")
+        # self.view.set_value()
 
     def open_project_manager(self):
         self.view.switch("project_manager")

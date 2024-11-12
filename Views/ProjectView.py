@@ -13,17 +13,17 @@ class ProjectView(tk.Toplevel):
         self.geometry("1000x600+100+50")
         self.protocol('WM_DELETE_WINDOW', self.master.destroy)
 
-        self.abspath = os.path.abspath("../")
+        self.abspath = None
         self.combobox = tk.StringVar()
 
         # Setting directory tree
         self.nodes = {}
         self.tree = ScrolledFileTree.ScrolledTreeView(self)
         self.tree.place(relx=0.014, rely=0.022, relheight=0.7, relwidth=0.4)
-        self.tree.heading("#0", text=self.abspath, anchor=tk.W)
+        # self.tree.heading("#0", text=self.abspath, anchor=tk.W)
 
         self.tree.bind("<<TreeviewOpen>>", self.open_node)
-        self.populate_node("", self.abspath)
+        # self.populate_node("", self.abspath)
 
         # Setting file viewer
         self.scrolled_text = ScrolledText.ScrolledText(self)
@@ -76,7 +76,26 @@ class ProjectView(tk.Toplevel):
         self.add_version_button.configure(foreground="#000000")
         self.add_version_button.configure(highlightbackground="#d9d9d9")
         self.add_version_button.configure(highlightcolor="#000000")
-        self.add_version_button.configure(text='''Button''')
+        self.add_version_button.configure(text='''Добавить новую версию''')
+
+        # Open file button
+        self.open_file_button = tk.Button(self)
+        self.open_file_button.place(relx=0.60, rely=0.85, height=56, width=150)
+
+        self.open_file_button.configure(activebackground="#d9d9d9")
+        self.open_file_button.configure(activeforeground="black")
+        self.open_file_button.configure(background="#d9d9d9")
+        self.open_file_button.configure(disabledforeground="#a3a3a3")
+        self.open_file_button.configure(font="-family {Segoe UI} -size 9")
+        self.open_file_button.configure(foreground="#000000")
+        self.open_file_button.configure(highlightbackground="#d9d9d9")
+        self.open_file_button.configure(highlightcolor="#000000")
+        self.open_file_button.configure(text='''Открыть файл''')
+
+    def set_project_path(self, path):
+        self.abspath = os.path.abspath(path)
+        self.tree.heading("#0", text=self.abspath, anchor=tk.W)
+        self.populate_node("", self.abspath)
 
     # Creating of directory tree
     def populate_node(self, parent, abspath):
@@ -95,3 +114,11 @@ class ProjectView(tk.Toplevel):
             children = self.tree.get_children(item)
             self.tree.delete(children)
             self.populate_node(item, path)
+
+    # Get window elements
+    def get_fields(self):
+        fields = {
+            "file_tree": self.tree,
+            "text_field": self.scrolled_text
+        }
+        return fields

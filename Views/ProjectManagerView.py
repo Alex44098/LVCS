@@ -47,5 +47,10 @@ class ProjectManagerView(tk.Toplevel):
         self.Button_create.configure(highlightcolor="#000000")
         self.Button_create.configure(text='''Создать''')
 
-    def add_item(self, item):
-        self.Scrolledlistbox.insert(0, item)
+    # Get window elements
+    def get_fields(self):
+        fields = {
+            "versions_listbox": self.Scrolledlistbox
+        }
+
+        return fields
