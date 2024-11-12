@@ -1,4 +1,5 @@
 import os
+from Models.Project import Project
 
 
 class ProjectController:
@@ -6,6 +7,10 @@ class ProjectController:
         self.model = model
         self.view = view
         self.view.add_binds(self._bind, "project")
+
+    def open_project(self, project: Project):
+        self.model.project.set_project(project)
+        self.view.current_frame.set_project_path(project.local_path)
 
     def open_file(self):
         file_tree = self.view.get_field("file_tree")
@@ -17,7 +22,6 @@ class ProjectController:
             parent_iid = file_tree.parent(parent_iid)
         i = file_tree.item(item, "text")
         path = os.path.join(*node, i)
-        path = os.path.abspath("../") + "\\" + path
 
         text_file = self.model.project.open_file(path)
 

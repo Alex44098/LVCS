@@ -1,6 +1,7 @@
 from Views.ProjectManagerView import ProjectManagerView
 from Views.ProjectCreatorView import ProjectCreatorView
 from Views.ProjectView import ProjectView
+from tkinter import messagebox
 
 
 class MainView:
@@ -36,6 +37,9 @@ class MainView:
             return self.current_frame_fields[name]
         else:
             print(name + " in " + type(self.current_frame) + " doesnt exist!")
+
+    def show_message(self, title, message):
+        messagebox.showwarning(title, message)
 
     def start_loop(self):
         self.parent.mainloop()

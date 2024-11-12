@@ -1,5 +1,6 @@
 from Models.DatabaseConnection import DatabaseConnection
 from Models.EventListener import EventListener
+from Models.Project import Project
 
 
 class ProjectManagerModel(EventListener):
@@ -8,13 +9,15 @@ class ProjectManagerModel(EventListener):
 
     def get_projects(self):
         connection = DatabaseConnection()
-        request = """SELECT * FROM projects;"""
+        request = "SELECT * FROM projects;"
         cursor = connection.get_cursor_query(request)
         cursor.execute(request)
-        projects = cursor.fetchall()
-
-        for project in projects:
-            yield project
+        projects_db = cursor.fetchall()
+        projects = []
+        for project_db in projects_db:
+            project = Project(project_db[0], project_db[1], project_db[2], project_db[3])
+            projects.append(project)
+        return projects
 
     def open_creator(self):
         self.trigger_event("open_creator")

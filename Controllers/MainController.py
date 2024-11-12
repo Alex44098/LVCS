@@ -29,14 +29,16 @@ class MainController:
 
     def open_creator_listener(self):
         self.view.switch("project_creator")
+        self.project_creator_controller.init_creator()
 
     def open_project_listener(self):
         self.view.switch("project")
-        self.view.current_frame.set_project_path("../")
-        # self.view.set_value()
+        self.project_controller.open_project(self.model.current_project)
+        # self.view.current_frame.set_project_path("../")
 
     def open_project_manager(self):
         self.view.switch("project_manager")
+        self.project_manager_controller.init_manager()
 
     def start(self):
         self.open_project_manager()

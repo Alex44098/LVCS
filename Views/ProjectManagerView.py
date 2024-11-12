@@ -50,7 +50,7 @@ class ProjectManagerView(tk.Toplevel):
     # Get window elements
     def get_fields(self):
         fields = {
-            "versions_listbox": self.Scrolledlistbox
+            "projects_listbox": self.Scrolledlistbox
         }
 
         return fields

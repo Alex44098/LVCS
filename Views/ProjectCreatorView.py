@@ -8,6 +8,7 @@ class ProjectCreatorView(tk.Toplevel):
         tk.Toplevel.__init__(self, parent)
         self.title("Создание проекта")
         self.geometry("416x450+539+241")
+        self.protocol('WM_DELETE_WINDOW', self.master.destroy)
 
         self.combobox = tk.StringVar()
         self.che60 = tk.IntVar()
@@ -132,19 +133,19 @@ class ProjectCreatorView(tk.Toplevel):
         self.name_entry.configure(selectbackground="#d9d9d9")
         self.name_entry.configure(selectforeground="black")
 
-        self.category_path = tk.Label(self)
-        self.category_path.place(relx=0.313, rely=0.134, height=21, width=264)
-        self.category_path.configure(activebackground="#d9d9d9")
-        self.category_path.configure(activeforeground="black")
-        self.category_path.configure(anchor='w')
-        self.category_path.configure(background="#d9d9d9")
-        self.category_path.configure(compound='left')
-        self.category_path.configure(disabledforeground="#a3a3a3")
-        self.category_path.configure(font="-family {Segoe UI} -size 9")
-        self.category_path.configure(foreground="#000000")
-        self.category_path.configure(highlightbackground="#d9d9d9")
-        self.category_path.configure(highlightcolor="#000000")
-        self.category_path.configure(text='''...''')
+        self.catalog_path = tk.Label(self)
+        self.catalog_path.place(relx=0.313, rely=0.134, height=21, width=264)
+        self.catalog_path.configure(activebackground="#d9d9d9")
+        self.catalog_path.configure(activeforeground="black")
+        self.catalog_path.configure(anchor='w')
+        self.catalog_path.configure(background="#d9d9d9")
+        self.catalog_path.configure(compound='left')
+        self.catalog_path.configure(disabledforeground="#a3a3a3")
+        self.catalog_path.configure(font="-family {Segoe UI} -size 9")
+        self.catalog_path.configure(foreground="#000000")
+        self.catalog_path.configure(highlightbackground="#d9d9d9")
+        self.catalog_path.configure(highlightcolor="#000000")
+        self.catalog_path.configure(text='''...''')
 
         self.choose_catalog_button = tk.Button(self)
         self.choose_catalog_button.place(relx=0.168, rely=0.2, height=26, width=287)
@@ -209,4 +210,16 @@ class ProjectCreatorView(tk.Toplevel):
     def get_directory_path(self):
         directory_path = filedialog.askdirectory()
         if directory_path != "":
-            self.category_path.config(text=directory_path)
+            self.catalog_path.config(text=directory_path)
+
+    # Get window elements
+    def get_fields(self):
+        fields = {
+            "name_text": self.name_entry,
+            "path_text": self.catalog_path,
+            "lang_combobox": self.lang_combobox,
+            "description_text": self.description_text,
+            "password_text": self.password_entry
+        }
+
+        return fields
