@@ -22,6 +22,8 @@ class ProjectCreatorController:
         new_project = self.model.project_creator.create_project(name_text.get(), path_text.cget('text'),
                                                                 description_text.get("1.0", "end"),
                                                                 lang_combobox.get(), password_text.get())
+        self.model.project_creator.create_first_version(new_project)
+
         self.model.set_project(new_project)
         self.model.project_creator.project_created()
 

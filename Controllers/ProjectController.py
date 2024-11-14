@@ -1,4 +1,5 @@
 import os
+import Models.ProjectFileManager as ProjectFileManager
 from Models.Project import Project
 
 
@@ -17,7 +18,7 @@ class ProjectController:
         item = file_tree.focus()
 
         ext = os.path.splitext(file_tree.item(item)['text'])[-1]
-        if not self.model.project.check_file_extension(ext[1:]):
+        if not ProjectFileManager.check_file_extension(ext[1:], self.model.current_project):
             self.view.show_message("Внимание", "Данный файл не является файлом языка проекта")
             return
 
