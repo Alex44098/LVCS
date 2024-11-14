@@ -21,12 +21,19 @@ def init_database():
         language_id INTEGER PRIMARY KEY,
         name TEXT NOT NULL);'''
 
+    lang_exts = '''
+        CREATE TABLE IF NOT EXISTS lang_exts (
+        ext_id INTEGER PRIMARY KEY,
+        lang_id INTEGER,
+        ext TEXT);'''
+
     versions = '''
         CREATE TABLE IF NOT EXISTS versions (
         version_id INTEGER PRIMARY KEY,
         project_id INTEGER NOT NULL,
         version_name TEXT NOT NULL,
-        description TEXT);'''
+        description TEXT,
+        prev_version INTEGER);'''
 
     version_diff = '''
         CREATE TABLE IF NOT EXISTS versions_diff (
@@ -40,5 +47,6 @@ def init_database():
     connection.execute_query(projects)
     connection.execute_query(projects_info)
     connection.execute_query(languages)
+    connection.execute_query(lang_exts)
     connection.execute_query(versions)
     connection.execute_query(version_diff)

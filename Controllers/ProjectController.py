@@ -15,6 +15,12 @@ class ProjectController:
     def open_file(self):
         file_tree = self.view.get_field("file_tree")
         item = file_tree.focus()
+
+        ext = os.path.splitext(file_tree.item(item)['text'])[-1]
+        if not self.model.project.check_file_extension(ext[1:]):
+            self.view.show_message("Внимание", "Данный файл не является файлом языка проекта")
+            return
+
         parent_iid = file_tree.parent(item)
         node = []
         while parent_iid != '':
