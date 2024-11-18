@@ -10,11 +10,11 @@ class ProjectController:
         self.view.add_binds(self._bind, "project")
 
     def open_project(self, project: Project):
+        # Set project
         self.model.project.set_project(project)
         self.view.current_frame.set_project_path(project.local_path)
+        # Load versions
         self.model.project.load_versions()
-        version_label = self.view.get_field("version_label")
-        version_label.config(text=self.model.project.get_current_version_name())
         self.set_versions()
 
     def open_version_creator(self):
@@ -26,6 +26,7 @@ class ProjectController:
         versions_names = []
         for version in versions:
             versions_names.append(version.name)
+        versions_names.append("Локальная")
         versions_combobox['values'] = versions_names
 
     def open_file(self):

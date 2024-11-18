@@ -56,7 +56,7 @@ class ProjectView(tk.Toplevel):
         self.Label2.configure(foreground="#000000")
         self.Label2.configure(highlightbackground="#d9d9d9")
         self.Label2.configure(highlightcolor="#000000")
-        self.Label2.configure(text='''Текущая версия проекта''')
+        self.Label2.configure(text='''Открытая версия проекта''')
 
         self.cur_version_label = tk.Label(self)
         self.cur_version_label.place(relx=0.02, rely=0.85, height=40, width=150)
@@ -70,7 +70,7 @@ class ProjectView(tk.Toplevel):
         self.cur_version_label.configure(foreground="#000000")
         self.cur_version_label.configure(highlightbackground="#d9d9d9")
         self.cur_version_label.configure(highlightcolor="#000000")
-        self.cur_version_label.configure(text='''Версия''')
+        self.cur_version_label.configure(text='''Локальная''')
 
         # Versions label
         self.Label1 = tk.Label(self)
@@ -105,7 +105,7 @@ class ProjectView(tk.Toplevel):
         self.select_version_button.configure(foreground="#000000")
         self.select_version_button.configure(highlightbackground="#d9d9d9")
         self.select_version_button.configure(highlightcolor="#000000")
-        self.select_version_button.configure(text='''Выбрать выбранную версию''')
+        self.select_version_button.configure(text='''Открыть выбранную версию''')
 
         # New version button
         self.new_version_button = tk.Button(self)
