@@ -39,9 +39,42 @@ class ProjectView(tk.Toplevel):
         self.scrolled_text.configure(selectforeground="black")
         self.scrolled_text.configure(wrap="none")
 
+        # Simple separator decoration
+        self.separator = ttk.Separator(self)
+        self.separator.place(relx=0.0, rely=0.733, relwidth=1.0)
+
+        # Current version labels
+        self.Label2 = tk.Label(self)
+        self.Label2.place(relx=0.02, rely=0.783, height=21, width=150)
+        self.Label2.configure(activebackground="#d9d9d9")
+        self.Label2.configure(activeforeground="black")
+        self.Label2.configure(anchor='w')
+        self.Label2.configure(background="#d9d9d9")
+        self.Label2.configure(compound='left')
+        self.Label2.configure(disabledforeground="#a3a3a3")
+        self.Label2.configure(font="-family {Segoe UI} -size 9")
+        self.Label2.configure(foreground="#000000")
+        self.Label2.configure(highlightbackground="#d9d9d9")
+        self.Label2.configure(highlightcolor="#000000")
+        self.Label2.configure(text='''Текущая версия проекта''')
+
+        self.cur_version_label = tk.Label(self)
+        self.cur_version_label.place(relx=0.02, rely=0.85, height=40, width=150)
+        self.cur_version_label.configure(activebackground="#d9d9d9")
+        self.cur_version_label.configure(activeforeground="black")
+        self.cur_version_label.configure(anchor='center')
+        self.cur_version_label.configure(background="#d9d9d9")
+        self.cur_version_label.configure(compound='center')
+        self.cur_version_label.configure(disabledforeground="#a3a3a3")
+        self.cur_version_label.configure(font="-family {Segoe UI} -size 15 -weight bold")
+        self.cur_version_label.configure(foreground="#000000")
+        self.cur_version_label.configure(highlightbackground="#d9d9d9")
+        self.cur_version_label.configure(highlightcolor="#000000")
+        self.cur_version_label.configure(text='''Версия''')
+
         # Versions label
         self.Label1 = tk.Label(self)
-        self.Label1.place(relx=0.02, rely=0.783, height=21, width=104)
+        self.Label1.place(relx=0.20, rely=0.783, height=21, width=104)
         self.Label1.configure(activebackground="#d9d9d9")
         self.Label1.configure(activeforeground="black")
         self.Label1.configure(anchor='w')
@@ -56,31 +89,41 @@ class ProjectView(tk.Toplevel):
 
         # Versions combobox
         self.versions_combobox = ttk.Combobox(self)
-        self.versions_combobox.place(relx=0.13, rely=0.783, relheight=0.032, relwidth=0.267)
+        self.versions_combobox.place(relx=0.33, rely=0.783, relheight=0.032, relwidth=0.267)
         self.versions_combobox.configure(font="-family {Segoe UI} -size 9")
         self.versions_combobox.configure(textvariable=self.combobox)
 
-        # Simple separator decoration
-        self.separator = ttk.Separator(self)
-        self.separator.place(relx=0.0, rely=0.733, relwidth=1.0)
+        # Select version button
+        self.select_version_button = tk.Button(self)
+        self.select_version_button.place(relx=0.25, rely=0.85, height=56, width=277)
 
-        # Add version button
-        self.add_version_button = tk.Button(self)
-        self.add_version_button.place(relx=0.07, rely=0.85, height=56, width=277)
+        self.select_version_button.configure(activebackground="#d9d9d9")
+        self.select_version_button.configure(activeforeground="black")
+        self.select_version_button.configure(background="#d9d9d9")
+        self.select_version_button.configure(disabledforeground="#a3a3a3")
+        self.select_version_button.configure(font="-family {Segoe UI} -size 9")
+        self.select_version_button.configure(foreground="#000000")
+        self.select_version_button.configure(highlightbackground="#d9d9d9")
+        self.select_version_button.configure(highlightcolor="#000000")
+        self.select_version_button.configure(text='''Выбрать выбранную версию''')
 
-        self.add_version_button.configure(activebackground="#d9d9d9")
-        self.add_version_button.configure(activeforeground="black")
-        self.add_version_button.configure(background="#d9d9d9")
-        self.add_version_button.configure(disabledforeground="#a3a3a3")
-        self.add_version_button.configure(font="-family {Segoe UI} -size 9")
-        self.add_version_button.configure(foreground="#000000")
-        self.add_version_button.configure(highlightbackground="#d9d9d9")
-        self.add_version_button.configure(highlightcolor="#000000")
-        self.add_version_button.configure(text='''Добавить новую версию''')
+        # New version button
+        self.new_version_button = tk.Button(self)
+        self.new_version_button.place(relx=0.625, rely=0.80, height=80, width=150)
+
+        self.new_version_button.configure(activebackground="#d9d9d9")
+        self.new_version_button.configure(activeforeground="black")
+        self.new_version_button.configure(background="#d9d9d9")
+        self.new_version_button.configure(disabledforeground="#a3a3a3")
+        self.new_version_button.configure(font="-family {Segoe UI} -size 9")
+        self.new_version_button.configure(foreground="#000000")
+        self.new_version_button.configure(highlightbackground="#d9d9d9")
+        self.new_version_button.configure(highlightcolor="#000000")
+        self.new_version_button.configure(text='''Новая версия''')
 
         # Open file button
         self.open_file_button = tk.Button(self)
-        self.open_file_button.place(relx=0.60, rely=0.85, height=56, width=150)
+        self.open_file_button.place(relx=0.80, rely=0.80, height=80, width=150)
 
         self.open_file_button.configure(activebackground="#d9d9d9")
         self.open_file_button.configure(activeforeground="black")
@@ -118,7 +161,9 @@ class ProjectView(tk.Toplevel):
     # Get window elements
     def get_fields(self):
         fields = {
+            "version_label": self.cur_version_label,
             "file_tree": self.tree,
-            "text_field": self.scrolled_text
+            "text_field": self.scrolled_text,
+            "versions_combobox": self.versions_combobox
         }
         return fields

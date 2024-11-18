@@ -12,6 +12,21 @@ class ProjectController:
     def open_project(self, project: Project):
         self.model.project.set_project(project)
         self.view.current_frame.set_project_path(project.local_path)
+        self.model.project.load_versions()
+        version_label = self.view.get_field("version_label")
+        version_label.config(text=self.model.project.get_current_version_name())
+        self.set_versions()
+
+    def open_version_creator(self):
+        self.model.project.open_version_project()
+
+    def set_versions(self):
+        versions_combobox = self.view.get_field("versions_combobox")
+        versions = self.model.project.get_versions()
+        versions_names = []
+        for version in versions:
+            versions_names.append(version.name)
+        versions_combobox['values'] = versions_names
 
     def open_file(self):
         file_tree = self.view.get_field("file_tree")
@@ -38,3 +53,4 @@ class ProjectController:
 
     def _bind(self, frame):
         frame.open_file_button.config(command=self.open_file)
+        frame.new_version_button.config(command=self.open_version_creator)

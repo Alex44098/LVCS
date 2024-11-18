@@ -11,7 +11,6 @@ class ProjectManagerModel(EventListener):
         connection = DatabaseConnection()
         request = "SELECT * FROM projects;"
         cursor = connection.get_cursor_query(request)
-        cursor.execute(request)
         projects_db = cursor.fetchall()
         projects = []
         for project_db in projects_db:
