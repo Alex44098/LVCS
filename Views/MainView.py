@@ -13,6 +13,8 @@ class MainView:
         self.binds = {}
 
         self.current_frame = None
+        self.current_dialog = None
+        self.current_dialog_fields = {}
         self.current_frame_fields = {}
 
         self.add_window(ProjectManagerView, "project_manager")
@@ -36,14 +38,24 @@ class MainView:
             self.binds[name](self.current_frame)
 
     def show_view_as_dialog(self, view_name):
-        view = self.windows[view_name](self.parent)
-        view.grab_set()
+        self.current_dialog = self.windows[view_name](self.parent)
+        self.current_dialog_fields.clear()
+        self.current_dialog_fields = self.current_dialog.get_fields()
+        if view_name in self.binds.keys():
+            self.binds[view_name](self.current_dialog)
+        self.current_dialog.grab_set()
+
+    def close_dialog(self):
+        if self.current_dialog is not None:
+            self.current_dialog.destroy()
+            self.current_dialog = None
 
     def get_field(self, name):
         if name in self.current_frame_fields.keys():
             return self.current_frame_fields[name]
-        else:
-            print(name + " in " + type(self.current_frame) + " doesnt exist!")
+        if name in self.current_dialog_fields.keys():
+            return self.current_dialog_fields[name]
+        return None
 
     def show_message(self, title, message):
         messagebox.showwarning(title, message)

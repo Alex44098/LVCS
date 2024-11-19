@@ -10,14 +10,10 @@ if __name__ == '__main__':
     root = Tk()
     root.withdraw()
 
+    init_database()
+
     model = MainModel()
     view = MainView(root)
     controller = MainController(model, view)
 
     controller.start()
-
-    # init_database()
-    # root = Tk()
-    # root.withdraw()
-    # project_manager_controller = MainController.ProjectChooserController(root)
-    # root.mainloop()

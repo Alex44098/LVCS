@@ -40,7 +40,8 @@ def init_database():
         diff_id INTEGER PRIMARY KEY,
         version_id INTEGER NOT NULL,
         file_name TEXT NOT NULL,
-        diff TEXT NOT NULL);'''
+        diff TEXT NOT NULL,
+        first_version INTEGER);'''
 
     connection = DatabaseConnection()
 

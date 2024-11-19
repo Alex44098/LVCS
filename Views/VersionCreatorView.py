@@ -75,3 +75,11 @@ class VersionCreatorView(tk.Toplevel):
         self.create_button.configure(highlightbackground="#d9d9d9")
         self.create_button.configure(highlightcolor="#000000")
         self.create_button.configure(text='''Создать''')
+
+    # Get window elements
+    def get_fields(self):
+        fields = {
+            "name_text": self.name_entry,
+            "desc_text": self.desc_text
+        }
+        return fields

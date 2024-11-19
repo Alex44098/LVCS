@@ -11,7 +11,6 @@ class ProjectModel(EventListener):
         super().__init__()
         self.project = None
         self.versions = []
-        self.current_version = None
 
     def set_project(self, project: Project):
         self.project = project
@@ -23,15 +22,11 @@ class ProjectModel(EventListener):
         cursor = connection.get_cursor_query(query)
         versions = cursor.fetchall()
         for item in versions:
-            version = Version(item[0], item[2], item[3], item[4])
+            version = Version(item[0], item[1], item[2], item[3], item[4])
             self.versions.append(version)
-        self.current_version = self.versions[len(self.versions) - 1]
 
     def get_versions(self):
         return self.versions
-
-    def get_current_version_name(self):
-        return self.current_version.name
 
     def open_version_project(self):
         self.trigger_event("open_version_creator")
