@@ -15,12 +15,12 @@ class ProjectController:
         self.view.current_frame.set_project_path(project.local_path)
         # Load versions
         self.model.project.load_versions()
-        self.set_versions()
+        self.set_versions_to_checkbox()
 
     def open_version_creator(self):
         self.model.project.open_version_project()
 
-    def set_versions(self):
+    def set_versions_to_checkbox(self):
         versions_combobox = self.view.get_field("versions_combobox")
         versions = self.model.project.get_versions()
         versions_names = []
@@ -28,6 +28,15 @@ class ProjectController:
             versions_names.append(version.name)
         versions_names.append("Локальная")
         versions_combobox['values'] = versions_names
+
+    def set_version(self):
+        versions_combobox = self.view.get_field("versions_combobox")
+        version_label = self.view.get_field("version_label")
+        self.model.project.set_version_by_name(versions_combobox.get())
+        if self.model.project.current_version is not None:
+            version_label.config(text=self.model.project.current_version.name)
+        else:
+            version_label.config(text="Локальная")
 
     def open_file(self):
         file_tree = self.view.get_field("file_tree")
@@ -55,3 +64,4 @@ class ProjectController:
     def _bind(self, frame):
         frame.open_file_button.config(command=self.open_file)
         frame.new_version_button.config(command=self.open_version_creator)
+        frame.select_version_button.config(command=self.set_version)
