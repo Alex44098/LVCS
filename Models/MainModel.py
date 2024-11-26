@@ -1,3 +1,4 @@
+from Models.PasswordModel import PasswordModel
 from Models.Project import Project
 from Models.ProjectManagerModel import ProjectManagerModel
 from Models.ProjectCreatorModel import ProjectCreatorModel
@@ -11,6 +12,7 @@ class MainModel:
         self.project_creator = ProjectCreatorModel()
         self.project = ProjectModel()
         self.version_creator = VersionCreatorModel()
+        self.password = PasswordModel()
 
         self.current_project = None
 

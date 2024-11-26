@@ -1,4 +1,5 @@
 from Views.ProjectManagerView import ProjectManagerView
+from Views.PasswordView import PasswordView
 from Views.ProjectCreatorView import ProjectCreatorView
 from Views.ProjectView import ProjectView
 from tkinter import messagebox
@@ -18,6 +19,7 @@ class MainView:
         self.current_frame_fields = {}
 
         self.add_window(ProjectManagerView, "project_manager")
+        self.add_window(PasswordView, "password")
         self.add_window(ProjectCreatorView, "project_creator")
         self.add_window(ProjectView, "project")
         self.add_window(VersionCreatorView, "version_creator")
@@ -59,6 +61,9 @@ class MainView:
 
     def show_message(self, title, message):
         messagebox.showwarning(title, message)
+
+    def wait_window(self, window):
+        self.parent.wait_window(window)
 
     def start_loop(self):
         self.parent.mainloop()
